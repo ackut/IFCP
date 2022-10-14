@@ -6,10 +6,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    context = {
-        'title': 'Главная',
-    }
-    return render_template('index.html', context=context)
+    return render_template('index.html')
 
 
 @app.route('/about/')
