@@ -9,9 +9,9 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/about/')
+@app.route('/auth/')
 def about():
-    return 'about'
+    return render_template('auth.html')
 
 
 if __name__ == '__main__':

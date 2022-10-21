@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+
+{% block content %}
+{{ super() }}
+
+<div class="content">
+    <img src="../static/img/logo.png" alt="Logotype" draggable="false">
+
+    <p class="tip">Уникальный код</p>
+    <form action="" method="post">
+        <input class="unique" type="password" name="unique" minlength="6" maxlength="8" pattern="[A-Za-z0-9]+" required>
+        <button class="submit" type="submit"><i class="fa-sharp fa-solid fa-arrow-right"></i></button>
+    </form>
+</div>
+
+{% endblock %}
