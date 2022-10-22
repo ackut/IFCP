@@ -6,8 +6,10 @@
 }
 
 .flash-message {
-    color: #fff;
     padding: 10px;
+
+    color: #fff;
+    font-weight: 500;
 }
 
 .flash {
