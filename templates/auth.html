@@ -6,14 +6,16 @@
 <div class="content">
     <img src="../static/img/logo.png" alt="Logotype" draggable="false">
 
-    <p class="tip">Уникальный код</p>
+    <p class="tip">Секретный ключ</p>
     <form action="/auth/" method="POST">
         <input class="unique" type="password" name="unique", minlength="6", maxlength="8">
         <button class="submit" type="submit"><i class="fa-sharp fa-solid fa-arrow-right"></i></button>
     </form>
 
-    {% for msg in get_flashed_messages() %}
-    <div class="flash">{{ msg }}</div>
+    {% for cat, msg in get_flashed_messages(True) %}
+    <div class="flash-container">
+        <div class="flash {{ cat }}">{{ msg }}</div>
+    </div>
     {% endfor %}
 </div>
 
