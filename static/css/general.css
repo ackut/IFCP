@@ -7,15 +7,21 @@
 
 .flash-message {
     color: #fff;
+    padding: 10px;
 }
 
 .flash {
     position: absolute;
 
     width: 100%;
-    padding: 10px;
     
     border-radius: 8px;
     box-shadow: 0 5px 30px #dfdfdf;
     background-color: #337FFF;
+}
+
+
+/* Main */
+body {
+    background-color: #eee;
 }

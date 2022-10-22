@@ -3,22 +3,24 @@
 {% block content %}
 {{ super() }}
 
-<div class="content">
-    <img src="../static/img/logo.png" alt="Logotype" draggable="false">
+<div class="container">
+    <div class="content">
+        <!-- <img src="../static/img/logo.png" alt="Logotype" draggable="false"> -->
 
-    <p class="tip">Секретный ключ</p>
-    <form action="/auth/" method="POST">
-        <input class="unique" type="password" name="unique", minlength="6", maxlength="8">
-        <button class="submit" type="submit"><i class="fa-sharp fa-solid fa-arrow-right"></i></button>
-    </form>
+        <p class="tip">Секретный ключ</p>
+        <form action="/auth/" method="POST">
+            <input class="unique" type="password" name="unique" , minlength="6" , maxlength="8">
+            <button class="submit" type="submit"><i class="fa-sharp fa-solid fa-arrow-right"></i></button>
+        </form>
 
-    {% for cat, msg in get_flashed_messages(True) %}
-    <div class="flash-container">
-        <div class="flash">
-            <div class="flash-message">{{ msg }}</div>
+        {% for cat, msg in get_flashed_messages(True) %}
+        <div class="flash-container">
+            <div class="flash">
+                <div class="flash-message">{{ msg }}</div>
+            </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 
 {% endblock %}

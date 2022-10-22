@@ -7,6 +7,7 @@ def auth():
     if request.method == 'POST':
         unique = request.form['unique']
 
+        # TODO: Добавить проверки.
         if not unique:
             flash('Пожалуйста, введите свой секретный ключ', category='warning')
             return render_template('auth.html')
