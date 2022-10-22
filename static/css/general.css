@@ -1,5 +1,11 @@
+/* Flash Messages */
 .flash-container {
     position: relative;
+
+    text-align: center;
+}
+
+.flash-message {
     color: #fff;
 }
 
@@ -11,20 +17,5 @@
     
     border-radius: 8px;
     box-shadow: 0 5px 30px #dfdfdf;
-}
-
-.flash.info {
     background-color: #337FFF;
-}
-
-.flash.success {
-    background-color: #33FF33;
-}
-
-.flash.warning {
-    background-color: #FF7F33;
-}
-
-.flash.error {
-    background-color: #FF3333;
 }
