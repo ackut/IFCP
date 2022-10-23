@@ -9,7 +9,7 @@ def auth():
 
         # TODO: Добавить проверки.
         if not unique:
-            flash('Пожалуйста, введите свой уникальный код', category='warning')
+            flash('Пожалуйста, введите свой уникальный код пж пж пж', category='warning')
             return render_template('auth.html')
 
         if unique and (6 > len(unique) < 8):
