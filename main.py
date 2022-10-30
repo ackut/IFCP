@@ -1,5 +1,5 @@
 from app import app
-import index, auth, panel
+import index, auth
 
 
 if __name__ == '__main__':
