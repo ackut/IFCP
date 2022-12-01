@@ -6,7 +6,7 @@ from app import app, db, Group, Student
 @app.route('/admin/', methods=['POST', 'GET'])
 def admin():
     context = {
-        'title': '',
+        'title': 'Админка',
         'groups': Group.query.order_by(Group.name).all(),
         'students': Student.query.order_by(Student.name).all()
     }
