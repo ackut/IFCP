@@ -8,16 +8,8 @@
     <div style="background-color: rgb(200, 223, 245);">
         <h3>Добавление группы</h3>
         <form action="" method="POST">
-            <div>Специальность</div>
+            <div>Название (Специальность)</div>
             <input type="text" name="group_name" spellcheck="false" autocomplete="off" maxlength="64" required>
-            
-            <div>Курс</div>
-            <select name="group_course" required>
-                <option value="1">Первый</option>
-                <option value="2">Второй</option>
-                <option value="3">Третий</option>
-                <option value="4">Четвёртый</option>
-            </select>
 
             <div>Логин</div>
             <input type="text" name="group_login" spellcheck="false" autocomplete="off" maxlength="16" required>
@@ -32,7 +24,7 @@
         <div>
             {% if context.groups %}
                 {% for group in context.groups %}
-                    <p>{{ group.name }} ({{ group.course }} курс)</p>
+                    <p>{{ group.name }} | Добавил: {{ group.creator }} - {{ group.creation_date }}</p>
                 {% endfor %}
             {% else %}
                 <p>Ниодной группы ещё не создано.</p>
@@ -55,17 +47,8 @@
                 {% endfor %}
             </select>
 
-            <div>Курс</div>
-            <select name="student_course" required>
-                <option value="1">Первый</option>
-                <option value="2">Второй</option>
-                <option value="3">Третий</option>
-                <option value="4">Четвёртый</option>
-                <option value="5">Пятый</option>
-            </select>
-
             <div>Номер зачётки</div>
-            <input type="text" name="student_login" spellcheck="false" autocomplete="off" maxlength="16" required>
+            <input type="text" name="student_login" spellcheck="false" autocomplete="off" maxlength="6" required>
 
             <input type="submit" name="add_student" value="Создать">
         </form>
@@ -74,7 +57,7 @@
         <div>
             {% if context.students %}
                 {% for student in context.students %}
-                    <p>{{ student.name }} ({{ context.groups[student.group-1].name }}, {{ student.course }} курс)</p>
+                    <p>{{ student.name }} ({{ context.groups[student.group-1].name }}) | Добавил: {{ student.creator }} - {{ student.creation_date }}</p>
                 {% endfor %}
             {% else %}
                 <p>Ниодного студента ещё не добавлено.</p>

@@ -1,14 +1,14 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, render_template, url_for, request, flash, session, redirect
-from app import app, db, Groups, Students
+from app import app, db, Group, Student
 
 
 @app.route('/admin/', methods=['POST', 'GET'])
 def admin():
     context = {
         'title': '',
-        'groups': Groups.query.order_by(Groups.course).all(),
-        'students': Students.query.order_by(Students.name).all()
+        'groups': Group.query.order_by(Group.name).all(),
+        'students': Student.query.order_by(Student.name).all()
     }
 
     # TODO: Добавить проверку на пустые поля.
@@ -16,10 +16,9 @@ def admin():
         form = request.form
         try:
             if 'create_group' in form:
-                hashed_password = generate_password_hash(form['group_password'])
-                group = Groups(
+                hashed_password = generate_password_hash(form['group_password'].strip())
+                group = Group(
                     name=form['group_name'].strip(),
-                    course=form['group_course'],
                     login=form['group_login'].strip(),
                     password=hashed_password,
                     creator=session['user']
@@ -28,11 +27,10 @@ def admin():
                 db.session.commit()
 
             if 'add_student' in form:
-                student = Students(
-                    login=form['student_login'].strip(),
+                student = Student(
                     name=form['student_name'].strip(),
                     group=form['student_group'],
-                    course=form['student_course'],
+                    login=form['student_login'].strip(),
                     creator=session['user']
                 )
                 db.session.add(student)
