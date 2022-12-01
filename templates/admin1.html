@@ -1,0 +1,41 @@
+{% extends 'general.html' %}
+
+{% block content %}
+{{ super() }}
+
+<div class="container">
+    <div class="content">
+        <div class="groups-header">
+            <p class="groups-header__text">Список групп</p>
+            <div class="groups-header__button">Добавить</div>
+        </div>
+        {% if context.groups %}
+        <div class="accordion accordion-flush" id="accordionFlushGroups">
+            {% for group in context.groups %}
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-heading-{{ group.id }}">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{ group.id }}" aria-expanded="false" aria-controls="flush-collapse-{{ group.id }}">
+                        {{ group.name }}
+                    </button>
+                </h2>
+                <div id="flush-collapse-{{ group.id }}" class="accordion-collapse collapse" aria-labelledby="flush-heading-{{ group.id }}" data-bs-parent="#accordionFlushGroups">
+                    <div class="accordion-body">
+                        {% for student in context.students %}
+                        {% if student.group == group.id %}
+                        <a href="#" class="student">
+                            <div class="student_avatar"></div><p class="student_name">{{ student.name }}</p>
+                        </a>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script src="../static/js/admin.js"></script>
+
+{% endblock %}

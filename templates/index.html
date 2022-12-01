@@ -1,12 +1,14 @@
-{% extends 'main.html' %}
+{% extends 'general.html' %}
 
 {% block content %}
 {{ super() }}
 
 <div class="container">
     <div class="content">
-        <a href="/auth/">Вход</a>
+        <h2>Главная страница</h2>
     </div>
 </div>
+
+<script src="../static/js/index.js"></script>
 
 {% endblock %}
