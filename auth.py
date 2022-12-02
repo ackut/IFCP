@@ -5,10 +5,10 @@ from app import app, db, Admin, Group, Teacher
 
 @app.route('/auth/', methods=['POST', 'GET'])
 def auth():
-    # admins = Admin.query.all()
-    # if not admins:
-        # db.session.add(Admin(login='root', password=generate_password_hash('root')))
-        # db.session.commit()
+    admins = Admin.query.all()
+    if not admins:
+        db.session.add(Admin(login='root', password=generate_password_hash('root')))
+        db.session.commit()
 
     if 'user' in session:
         return redirect(url_for('index'))
