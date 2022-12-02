@@ -7,7 +7,7 @@ from app import app, db, Admin, Group, Teacher
 def auth():
     admins = Admin.query.all()
     if not admins:
-        db.session.add(Admin(login='root', password=generate_password_hash('root')))
+        db.session.add(Admin(login='root', password=generate_password_hash('root')), creator='system')
         db.session.commit()
 
     if 'user' in session:

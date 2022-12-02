@@ -7,6 +7,28 @@
     <div class="content">
         <h1>Админка</h1>
         <div style="background-color: rgb(191, 220, 248);">
+            <div style="background-color: rgb(247, 214, 214);">
+                <h3>Добавление админа</h3>
+                <form action="" method="POST">
+                    <div>Логин</div>
+                    <input type="text" name="admin_login" spellcheck="false" autocomplete="off" maxlength="16" required>
+                    
+                    <div>Пароль</div>
+                    <input type="password" name="admin_password" autocomplete="off" maxlength="32" required>
+        
+                    <input type="submit" name="add_admin" value="Добавить">
+                </form>
+        
+                <h3>Список администраторов</h3>
+                <div>
+                    {% for admin in context.admins %}
+                        <p>{{ admin.login }} | Добавил: {{ admin.creator }} - {{ admin.creation_date }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <hr>
+
             <h3>Добавление группы</h3>
             <form action="" method="POST">
                 <div>Название (Специальность)</div>
@@ -121,6 +143,21 @@
                 {% endif %}
             </div>
         </div>
+    
+        <hr>
+    
+        <div style="background-color: rgb(99, 146, 148);">
+            <h3>Логи</h3>
+            {% if context.logs %}
+            {% for log in context.logs %}
+            <p>{{ log.priority }}, {{ log.creator_id }}, {{ log.text }}, {{ log.creation_date }} </p>
+            {% endfor %}
+            {% else %}
+            <p>Данные отсутствуют.</p>
+            {% endif %}
+        </div>
+
+
     </div>
 </div>
 
