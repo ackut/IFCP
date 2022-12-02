@@ -5,7 +5,36 @@
 
 <div class="container">
     <div class="content">
-        <h2>Главная страница</h2>
+        <h2>Таблица типа</h2>
+        {% if session['status'] == 2 %}
+        <div class="table">
+            {% set groups = context.Group.query.order_by(context.Group.name).all() %}
+            {% set subjects = context.Subject.query.order_by(context.Subject.name).all() %}
+            
+            <div class="table__header">
+                <form action="/" method="POST" name="table_generate">
+                    <select name="table__group-select">
+                        {% set groups = context.Group.query.order_by(context.Group.name).all() %}
+                        {% for group in groups %}
+                        <option value="{{ group.id }}">{{ group.name }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <select name="table__subject-select">
+                        {% set teacher_subject = context.TeacherSubject.query.filter_by(teacher_id=session['user_id']).all() %}
+                        {% for subject in teacher_subject %}
+                        <option value="{{ subject.subject_id }}">{{ subjects[subject.subject_id-1].name }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <input type="submit" value="Туда эту суку">
+                </form>
+            </div>
+            {% if context.table_selected %}
+            <p>Выбрано: {{ groups[context.table_selected['group']-1].name }} ({{ subjects[context.table_selected['subject']-1].name }})</p>
+            {% endif %}
+        </div>
+        {% endif %}
     </div>
 </div>
 

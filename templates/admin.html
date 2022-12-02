@@ -4,64 +4,122 @@
 {{ super() }}
 
 <div class="container">
-    <h1>Админка</h1>
-    <div style="background-color: rgb(200, 223, 245);">
-        <h3>Добавление группы</h3>
-        <form action="" method="POST">
-            <div>Название (Специальность)</div>
-            <input type="text" name="group_name" spellcheck="false" autocomplete="off" maxlength="64" required>
-
-            <div>Логин</div>
-            <input type="text" name="group_login" spellcheck="false" autocomplete="off" maxlength="16" required>
-            
-            <div>Пароль</div>
-            <input type="password" name="group_password" autocomplete="off" maxlength="32" required>
-
-            <input type="submit" name="create_group" value="Создать">
-        </form>
-
-        <h3>Список групп</h3>
-        <div>
-            {% if context.groups %}
-                {% for group in context.groups %}
-                    <p>{{ group.name }} | Добавил: {{ group.creator }} - {{ group.creation_date }}</p>
-                {% endfor %}
-            {% else %}
-                <p>Ниодной группы ещё не создано.</p>
-            {% endif %}
+    <div class="content">
+        <h1>Админка</h1>
+        <div style="background-color: rgb(191, 220, 248);">
+            <h3>Добавление группы</h3>
+            <form action="" method="POST">
+                <div>Название (Специальность)</div>
+                <input type="text" name="group_name" spellcheck="false" autocomplete="off" maxlength="64" required>
+    
+                <div>Логин</div>
+                <input type="text" name="group_login" spellcheck="false" autocomplete="off" maxlength="16" required>
+                
+                <div>Пароль</div>
+                <input type="password" name="group_password" autocomplete="off" maxlength="32" required>
+    
+                <input type="submit" name="create_group" value="Создать">
+            </form>
+    
+            <h3>Список групп</h3>
+            <div>
+                {% if context.groups %}
+                    {% for group in context.groups %}
+                        <p>{{ group.name }} | Добавил: {{ group.creator }} - {{ group.creation_date }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>Ниодной группы ещё не создано.</p>
+                {% endif %}
+            </div>
         </div>
-    </div>
-
-    <hr>
-
-    <div style="background-color: rgb(238, 247, 214);">
-        <h3>Добавление пользователя</h3>
-        <form action="" method="POST">
-            <div>Фамилия Имя</div>
-            <input type="text" name="student_name" spellcheck="false" autocomplete="off" maxlength="32" required>
-
-            <div>Группа</div>
-            <select name="student_group" required>
-                {% for group in context.groups %}
-                <option value="{{ group.id }}">{{ group.name }}</option>
+    
+        <hr>
+    
+        <div style="background-color: rgb(247, 214, 214);">
+            <h3>Добавление студента</h3>
+            <form action="" method="POST">
+                <div>Фамилия Имя</div>
+                <input type="text" name="student_name" spellcheck="false" autocomplete="off" maxlength="32" required>
+    
+                <div>Группа</div>
+                <select name="student_group" required>
+                    {% for group in context.groups %}
+                    <option value="{{ group.id }}">{{ group.name }}</option>
+                    {% endfor %}
+                </select>
+    
+                <div>Номер зачётки</div>
+                <input type="text" name="student_login" spellcheck="false" autocomplete="off" maxlength="6" required>
+    
+                <input type="submit" name="add_student" value="Создать">
+            </form>
+    
+            <h3>Список пользователей</h3>
+            <div>
+                {% if context.students %}
+                    {% for student in context.students %}
+                        <p>{{ student.name }} ({{ context.groups[student.group-1].name }}) | Добавил: {{ student.creator }} - {{ student.creation_date }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>Ниодного студента ещё не добавлено.</p>
+                {% endif %}
+            </div>
+        </div>
+    
+        <hr>
+    
+        <div style="background-color: rgb(248, 247, 204);">
+            <h3>Добавление преподавателя</h3>
+            <form action="" method="POST">
+                <div>Фамилия Имя</div>
+                <input type="text" name="teacher_name" spellcheck="false" autocomplete="off" maxlength="32" required>
+                
+                {% for subject in context.subjects %}
+                <p><input type="checkbox" name="teacher_subject" value="{{ subject.id }}">{{ subject.name }}</p>
                 {% endfor %}
-            </select>
-
-            <div>Номер зачётки</div>
-            <input type="text" name="student_login" spellcheck="false" autocomplete="off" maxlength="6" required>
-
-            <input type="submit" name="add_student" value="Создать">
-        </form>
-
-        <h3>Список пользователей</h3>
-        <div>
-            {% if context.students %}
-                {% for student in context.students %}
-                    <p>{{ student.name }} ({{ context.groups[student.group-1].name }}) | Добавил: {{ student.creator }} - {{ student.creation_date }}</p>
-                {% endfor %}
-            {% else %}
-                <p>Ниодного студента ещё не добавлено.</p>
-            {% endif %}
+    
+                <div>Логин</div>
+                <input type="text" name="teacher_login" spellcheck="false" autocomplete="off" maxlength="16" required>
+                
+                <div>Пароль</div>
+                <input type="password" name="teacher_password" autocomplete="off" maxlength="32" required>
+    
+                <input type="submit" name="add_teacher" value="Добавить">
+            </form>
+    
+            <h3>Список преподавателей</h3>
+            <div>
+                {% if context.teachers %}
+                    {% for teacher in context.teachers %}
+                        <p>{{ teacher.name }} | Добавил: {{ teacher.creator }} - {{ teacher.creation_date }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>Ниодного преподавателя ещё не добавлено.</p>
+                {% endif %}
+            </div>
+        </div>
+    
+        <hr>
+    
+        <div style="background-color: rgb(197, 240, 201);">
+            <h3>Добавление предмета</h3>
+            <form action="" method="POST">
+                <div>Название</div>
+                <input type="text" name="subject_name" spellcheck="false" autocomplete="off" maxlength="32" required>
+    
+                <input type="submit" name="add_subject" value="Добавить">
+            </form>
+    
+            <h3>Список предметов</h3>
+            <div>
+                {% if context.subjects %}
+                    {% for subject in context.subjects %}
+                        <p>{{ subject.name }} | Добавил: {{ subject.creator }} - {{ subject.creation_date }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>Ниодного предмета ещё не добавлено.</p>
+                {% endif %}
+            </div>
         </div>
     </div>
 </div>

@@ -7,6 +7,12 @@
     <div>
         <h1>Авторизация</h1>
         <form action="/auth/" method="POST">
+            <select name="user_status">
+                <option value="1">Студент</option>
+                <option value="2">Преподаватель</option>
+                <option value="3">Администратор</option>
+            </select>
+
             <div>Логин</div>
             <input type="text" name="user_login" spellcheck="false" autocomplete="off" maxlength="16" required>
 
