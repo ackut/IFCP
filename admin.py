@@ -34,7 +34,8 @@ def admin():
                 logger(3, session['user_id'], f'{session["user"]} добавил администратора {admin.login}')
 
             except Exception as ex:
-                print('Ошибка добавления админа.\n' + ex)
+                print('Ошибка добавления администратора.\n' + ex)
+                logger(3, session['user_id'], 'Ошибка добавления администратора')
 
         if 'create_group' in form:
             try:
@@ -62,9 +63,11 @@ def admin():
                 )
                 db.session.add(student)
                 db.session.commit()
+                logger(0, session['user_id'], f'{session["user"]} добавил студента {student.name} ({student.login})')
 
             except Exception as ex:
                 print('Ошибка добавления студента.\n' + ex)
+                logger(0, session['user_id'], 'Ошибка добавления студента')
 
         if 'add_subject' in form:
             try:
@@ -74,9 +77,11 @@ def admin():
                 )
                 db.session.add(subject)
                 db.session.commit()
+                logger(0, session['user_id'], f'{session["user"]} добавил предмет ({subject.name})')
 
             except Exception as ex:
                 print('Ошибка добавления предмета.\n' + ex)
+                logger(0, session['user_id'], 'Ошибка добавления предмета')
 
         if 'add_teacher' in form:
             try:
@@ -96,9 +101,11 @@ def admin():
                     )
                     db.session.add(teacher_subject)
                 db.session.commit()
+                logger(0, session['user_id'], f'{session["user"]} преподавателя {teacher.name} ({teacher.login})')
 
             except Exception as ex:
                 print('Ошибка добавления преподавателя.\n' + ex)
+                logger(0, session['user_id'], 'Ошибка добавления преподавателя')
 
         return redirect(url_for('admin'))
 

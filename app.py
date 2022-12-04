@@ -22,7 +22,7 @@ class Admin(db.Model):
     login = db.Column(db.String(16), unique=True)
     password = db.Column(db.String(500), nullable=False)
     creator = db.Column(db.String(16), nullable=False)
-    creation_date = db.Column(db.DateTime, default=datetime.utcnow)
+    creation_date = db.Column(db.DateTime, default=datetime.now())
 
     def __repr__(self):
         return f'<admin {self.id}>'
@@ -35,7 +35,7 @@ class Teacher(db.Model):
     login = db.Column(db.String(16), unique=True)
     password = db.Column(db.String(500), nullable=False)
     creator = db.Column(db.String(16), nullable=False)
-    creation_date = db.Column(db.DateTime, default=datetime.utcnow)
+    creation_date = db.Column(db.DateTime, default=datetime.now())
 
     def __repr__(self):
         return f'<teacher {self.id}>'
@@ -48,7 +48,7 @@ class Group(db.Model):
     login = db.Column(db.String(16), unique=True)
     password = db.Column(db.String(500), nullable=False)
     creator = db.Column(db.String(16), nullable=False)
-    creation_date = db.Column(db.DateTime, default=datetime.utcnow)
+    creation_date = db.Column(db.DateTime, default=datetime.now())
 
     def __repr__(self):
         return f'<group {self.id}>'
@@ -61,7 +61,7 @@ class Student(db.Model):
     login = db.Column(db.String(6), unique=True)  # Номер зачётки.
     group = db.Column(db.Integer, nullable=False)
     creator = db.Column(db.String(16), nullable=False)
-    creation_date = db.Column(db.DateTime, default=datetime.utcnow)
+    creation_date = db.Column(db.DateTime, default=datetime.now())
 
     def __repr__(self):
         return f'<student {self.id}>'
@@ -72,7 +72,7 @@ class Subject(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32), nullable=False)  # Название предмета.
     creator = db.Column(db.String(16), nullable=False)
-    creation_date = db.Column(db.DateTime, default=datetime.utcnow)
+    creation_date = db.Column(db.DateTime, default=datetime.now())
 
     def __repr__(self):
         return f'<subject {self.id}>'
@@ -84,7 +84,7 @@ class Grade(db.Model):
     name = db.Column(db.String(32), nullable=False)  # Название предмета.
     student = db.Column(db.Integer, nullable=False)  # Студент.
     creator = db.Column(db.String(16), nullable=False)  # Преподаватель.
-    creation_date = db.Column(db.DateTime, default=datetime.utcnow)
+    creation_date = db.Column(db.DateTime, default=datetime.now())
 
     def __repr__(self):
         return f'<grade {self.id}>'
@@ -108,7 +108,7 @@ class Logs(db.Model):
     creator_id = db.Column(db.Integer, nullable=False)
     text = db.Column(db.String(500), nullable=False)
     exception = db.Column(db.String(500))
-    creation_date = db.Column(db.DateTime, default=datetime.utcnow)
+    creation_date = db.Column(db.DateTime, default=datetime.now())
 
     def __repr__(self):
         return f'<logs {self.id}>'
