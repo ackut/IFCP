@@ -34,8 +34,7 @@ def admin():
                 logger(3, session['user_id'], f'{session["user"]} добавил администратора {admin.login}')
 
             except Exception as ex:
-                print('Ошибка добавления администратора.\n' + ex)
-                logger(3, session['user_id'], 'Ошибка добавления администратора')
+                logger(3, session['user_id'], 'Ошибка добавления администратора', str(ex))
 
         if 'create_group' in form:
             try:
@@ -50,8 +49,7 @@ def admin():
                 logger(0, session['user_id'], f'{session["user"]} добавил группу {group.name} ({group.login})')
                 
             except Exception as ex:
-                print('Ошибка добавления группы.\n' + ex)
-                logger(2, session['user_id'], 'Ошибка добавления группы')
+                logger(2, session['user_id'], 'Ошибка добавления группы', str(ex))
 
         if 'add_student' in form:
             try:
@@ -66,8 +64,7 @@ def admin():
                 logger(0, session['user_id'], f'{session["user"]} добавил студента {student.name} ({student.login})')
 
             except Exception as ex:
-                print('Ошибка добавления студента.\n' + ex)
-                logger(0, session['user_id'], 'Ошибка добавления студента')
+                logger(0, session['user_id'], 'Ошибка добавления студента', str(ex))
 
         if 'add_subject' in form:
             try:
@@ -80,8 +77,7 @@ def admin():
                 logger(0, session['user_id'], f'{session["user"]} добавил предмет ({subject.name})')
 
             except Exception as ex:
-                print('Ошибка добавления предмета.\n' + ex)
-                logger(0, session['user_id'], 'Ошибка добавления предмета')
+                logger(0, session['user_id'], 'Ошибка добавления предмета', str(ex))
 
         if 'add_teacher' in form:
             try:
@@ -101,11 +97,10 @@ def admin():
                     )
                     db.session.add(teacher_subject)
                 db.session.commit()
-                logger(0, session['user_id'], f'{session["user"]} преподавателя {teacher.name} ({teacher.login})')
+                logger(0, session['user_id'], f'{session["user"]} добавил преподавателя {teacher.name} ({teacher.login})')
 
             except Exception as ex:
-                print('Ошибка добавления преподавателя.\n' + ex)
-                logger(0, session['user_id'], 'Ошибка добавления преподавателя')
+                logger(0, session['user_id'], 'Ошибка добавления преподавателя', str(ex))
 
         return redirect(url_for('admin'))
 
