@@ -96,3 +96,22 @@ class TeacherSubject(db.Model):
 
     def __repr__(self):
         return f'<teacher_subject {self.id}>'
+
+
+class Logs(db.Model):
+    __tablename__ = 'logs'
+    id = db.Column(db.Integer, primary_key=True)
+    priority = db.Column(db.Integer, default=0)
+    creator_id = db.Column(db.Integer, nullable=False)
+    text = db.Column(db.String(500), nullable=False)
+    exception = db.Column(db.String(500))
+    creation_date = db.Column(db.DateTime, default=datetime.now())
+
+    def __repr__(self):
+        return f'<logs {self.id}>'
+
+
+def logger(priority: int, creator_id: int, text: str, exception: str = ''):
+    logs = Logs(priority=priority, creator_id=creator_id, text=text, exception=exception)
+    db.session.add(logs)
+    db.session.commit()
