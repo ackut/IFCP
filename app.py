@@ -82,7 +82,7 @@ class Grade(db.Model):
     subject_id = db.Column(db.String(32), nullable=False)  # Название предмета.
     student_id = db.Column(db.Integer, nullable=False)  # Студент.
     teacher_id = db.Column(db.String(16), nullable=False)  # Преподаватель.
-    creation_date = db.Column(db.DateTime, default=datetime.utcnow)
+    creation_date = db.Column(db.DateTime, default=datetime.now())
 
     def __repr__(self):
         return f'<grade {self.id}>'
