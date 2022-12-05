@@ -79,9 +79,9 @@ class Subject(db.Model):
 class Grade(db.Model):
     __tablename__ = 'grades'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(32), nullable=False)  # Название предмета.
-    student = db.Column(db.Integer, nullable=False)  # Студент.
-    creator = db.Column(db.String(16), nullable=False)  # Преподаватель.
+    subject_id = db.Column(db.String(32), nullable=False)  # Название предмета.
+    student_id = db.Column(db.Integer, nullable=False)  # Студент.
+    teacher_id = db.Column(db.String(16), nullable=False)  # Преподаватель.
     creation_date = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
