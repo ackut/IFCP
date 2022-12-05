@@ -22,6 +22,9 @@
             <input type="submit" value="Войти">
         </form>
     </div>
+    {% for msg in get_flashed_messages() %}
+    </div class="flash">{{msg}}</div>
+    {% endfor %}
 </div>
 
 <script src="../static/js/auth.js"></script>

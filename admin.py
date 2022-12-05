@@ -1,3 +1,4 @@
+import re
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, render_template, url_for, request, flash, session, redirect
 from app import app, db, Group, Student, Subject, Grade, Teacher, TeacherSubject, logger, Logs, Admin
