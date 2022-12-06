@@ -1,10 +1,10 @@
 from flask import Flask, render_template, url_for, request, flash, session, redirect
-from app import app, Student, Group, Subject, Teacher, TeacherSubject
+from app import app, Student, Subject, TeacherSubject
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    if 'user' not in session:
+    if 'user_id' not in session:
         return redirect(url_for('auth'))
 
     table_selected = {}
@@ -15,10 +15,8 @@ def index():
 
     context = {
         'title': 'Таблица',
-        'Group': Group,
         'Student': Student,
         'Subject': Subject,
-        'Teacher': Teacher,
         'TeacherSubject': TeacherSubject,
         'table_selected': table_selected
     }

@@ -6,20 +6,14 @@
 <div class="container">
     <div>
         <h1>Авторизация</h1>
-        <form action="/auth/" method="POST">
-            <select name="user_status">
-                <option value="1">Студент</option>
-                <option value="2">Преподаватель</option>
-                <option value="3">Администратор</option>
-            </select>
-
+        <form action="/auth/" method="POST" id="auth-form">
             <div>Логин</div>
             <input type="text" name="user_login" spellcheck="false" autocomplete="off" maxlength="16" required>
 
             <div>Пароль</div>
             <input type="password" name="user_password" autocomplete="off" maxlength="32" required>
 
-            <input type="submit" value="Войти">
+            <input type="submit" value="Войти" onclick="authUser()">
         </form>
     </div>
 </div>
