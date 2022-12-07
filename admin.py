@@ -1,6 +1,6 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, render_template, url_for, request, flash, session, redirect
-from app import app, db, User, logger, Logs
+from app import app, db, User, logger, Logs, StudentUser, Student
 
 
 @app.route('/admin/', methods=['POST', 'GET'])
@@ -11,7 +11,8 @@ def admin():
     context = {
         'title': 'Админка',
         'User': User,
-        'Logs': Logs
+        'Logs': Logs,
+        'Student': Student
     }
 
     # TODO: Добавить проверку на пустые поля.
@@ -34,6 +35,29 @@ def admin():
 
             except Exception as ex:
                 logger(3, session['user_id'], 'Ошибка добавления пользователя', str(ex))
+
+        if 'add_student' in form:
+            try:
+                student = Student(
+                    name=form['name'].strip(),
+                    login=form['login'].strip(),
+                    group_id=form['group_id'],
+                    creator=session['user_name']
+                )
+                db.session.add(student)
+                db.session.flush()
+
+                student_user = StudentUser(
+                    student_id=student.id,
+                    user_id=student.group_id
+                )
+                db.session.add(student_user)
+                db.session.commit()
+
+                logger(1, session['user_name'], f'Студент добавлен: {student.name} | {student.login} | {student.group_id}')
+
+            except Exception as ex:
+                logger(3, session['user_name'], 'Ошибка добавления студента', str(ex))
 
         redirect(url_for('admin'))
 

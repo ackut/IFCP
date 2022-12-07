@@ -66,16 +66,6 @@ class Grade(db.Model):
         return f'<grade {self.id}>'
 
 
-class TeacherSubject(db.Model):
-    __tablename__ = 'teacher_subject'
-    id = db.Column(db.Integer, primary_key=True)
-    teacher_id = db.Column(db.Integer, nullable=False)  # Преподаватель.
-    subject_id = db.Column(db.Integer, nullable=False)  # Предмет.
-
-    def __repr__(self):
-        return f'<teacher_subject {self.id}>'
-
-
 class Logs(db.Model):
     __tablename__ = 'logs'
     id = db.Column(db.Integer, primary_key=True)
