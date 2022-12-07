@@ -11,7 +11,7 @@
         <div style="background-color: rgb(191, 220, 248);">
             <div style="background-color: rgb(247, 214, 214);">
                 <h3>Добавление пользователя</h3>
-                <form action="" method="POST">
+                <form id="create_user">
                     <p>Публичное имя</p>
                     <input type="text" name="name" spellcheck="false" autocomplete="off" maxlength="32" required>
 
@@ -23,12 +23,13 @@
 
                     <p>Пароль</p>
                     <input type="password" name="password" autocomplete="off" maxlength="32" required>
-
-                    <input type="submit" name="create_user" value="Добавить">
+                    
+                    <input type="text" name="create_user" hidden>
+                    <input type="submit" value="Добавить">
                 </form>
 
                 <h3>Список пользователей</h3>
-                <div>
+                <div id="users_list">
                     {% if users %}
                     {% for user in users %}
                     <p>{{ user.name }} | {{ user.login }} | {{ user.status }} | Добавил: {{ user.creator }} - {{ user.creation_date }}</p>

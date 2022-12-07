@@ -1,15 +1,14 @@
-// function authUser() {
-//     $('auth-form').submit(function (e) {
-//         var $form = $(this);
-//         $.ajax({
-//             url: $form.attr('action'),
-//             type: $form.attr('method'),
-//             data: $form.serialize()
-//         }).done(function () {
-//             console.log('success');
-//         }).fail(function () {
-//             console.log('fail');
-//         });
-//         e.preventDefault();
-//     });
-// }
+['#auth'].forEach((item) => {
+    if (item) {
+        $(item).submit(function (e) {
+            e.preventDefault();
+            var form_data = $(this).serialize();
+            $.ajax({
+                type: "POST", url: "", data: form_data,
+                success: function () {
+                    document.querySelector(item).reset();
+                }
+            });
+        });
+    };
+});
