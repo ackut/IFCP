@@ -22,14 +22,14 @@ def auth():
 
     elif request.method == 'POST':
         form = request.form
-        if form['user_login'] and form['user_password']:
-            user = User.query.filter_by(login=form['user_login']).first()
+        if form['login'] and form['password']:
+            user = User.query.filter_by(login=form['login']).first()
             if not user:
-                print(f'Неверный логин пользователя: {form["user_login"]}.')
+                print(f'Неверный логин пользователя: {form["login"]}.')
                 return redirect(url_for('auth'))
 
-            if not check_password_hash(user.password, form['user_password']):
-                print(f'Неверный пароль пользователя {form["user_login"]}.')
+            if not check_password_hash(user.password, form['password']):
+                print(f'Неверный пароль пользователя {form["login"]}.')
                 return redirect(url_for('auth'))
 
             session['user_id'] = user.id

@@ -17,7 +17,6 @@ def admin():
     # TODO: Добавить проверку на пустые поля.
     if request.method == 'POST':
         form = request.form
-        print(form)
 
         if 'create_user' in form:
             try:
@@ -35,5 +34,7 @@ def admin():
 
             except Exception as ex:
                 logger(3, session['user_id'], 'Ошибка добавления пользователя', str(ex))
+
+        redirect(url_for('admin'))
 
     return render_template('admin.html', context=context)

@@ -11,7 +11,7 @@
         <div style="background-color: rgb(191, 220, 248);">
             <div style="background-color: rgb(247, 214, 214);">
                 <h3>Добавление пользователя</h3>
-                <form id="create_user">
+                <form action="" method="post">
                     <p>Публичное имя</p>
                     <input type="text" name="name" spellcheck="false" autocomplete="off" maxlength="32" required>
 
@@ -24,8 +24,7 @@
                     <p>Пароль</p>
                     <input type="password" name="password" autocomplete="off" maxlength="32" required>
                     
-                    <input type="text" name="create_user" hidden>
-                    <input type="submit" value="Добавить">
+                    <input type="submit" name="create_user" value="Добавить">
                 </form>
 
                 <h3>Список пользователей</h3>
