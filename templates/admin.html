@@ -2,6 +2,9 @@
 {% set users = context.User.query.all() %}
 {% set groups = context.User.query.filter_by(status=1).all() %}
 {% set students = context.Student.query.all() %}
+{% set subjects = context.Subject.query.all() %}
+{% set user_subjects = context.UserSubject.query.all() %}
+{% set teachers = context.User.query.filter_by(status=2).all() %}
 {% set logs = context.Logs.query.order_by(context.Logs.creation_date).all() %}
 
 {% block content %}
@@ -28,16 +31,14 @@
                 <input type="submit" name="create_user" value="Добавить">
             </form>
 
+            {% if users %}
             <h3>Список пользователей</h3>
-            <div id="users_list">
-                {% if users %}
+            <div>
                 {% for user in users %}
                 <p>{{ user.name }} | {{ user.login }} | {{ user.status }} | Добавил: {{ user.creator }} - {{ user.creation_date }}</p>
                 {% endfor %}
-                {% else %}
-                <p>Пользователей ниту.</p>
-                {% endif %}
             </div>
+            {% endif %}
         </div>
 
         <hr>
@@ -45,6 +46,7 @@
         <div style="background-color: rgb(247, 245, 214);">
             <h3>Добавление студента</h3>
             <form action="" method="post">
+                {% if groups %}
                 <p>ФИО</p>
                 <input type="text" name="name" spellcheck="false" autocomplete="off" maxlength="32" required>
 
@@ -52,33 +54,96 @@
                 <input type="text" name="login" spellcheck="false" autocomplete="off" maxlength="16" required>
 
                 <p>Группы</p>
-                {% if groups %}
                 <select name="group_id">
                     {% for group in groups %}
                     <option value="{{ group.id }}">{{ group.name }}</option>
                     {% endfor %}                
                 </select>
-                {% else %}
-                <p>Нету групп</p>
-                {% endif %}
                 
                 <input type="submit" name="add_student" value="Добавить">
+                {% else %}
+                <p>Сначала добавьте группу.</p>
+                {% endif %}
             </form>
-
+            
+            {% if students %}
             <h3>Список студентов</h3>
             <div>
-                {% if students %}
                 {% for student in students %}
                 <p>{{ student.name }} | {{ student.login }} | {{ users[student.group_id-1].name }} | Добавил: {{ student.creator }} - {{ student.creation_date }}</p>
                 {% endfor %}
-                {% else %}
-                <p>Студентов ниту.</p>
-                {% endif %}
             </div>
+            {% endif %}
         </div>
 
         <hr>
 
+        <div style="background-color: rgb(194, 246, 210);">
+            <h3>Добавление преподавателя </h3>
+            {% if teachers and subjects %}
+            <form action="" method="post">
+                <h4>Преподаватель</h4>
+                {% if teachers %}
+                <select name="user_id">
+                    {% for teacher in teachers %}
+                    <option value="{{ teacher.id }}">{{ teacher.name }}</option>
+                    {% endfor %}
+                </select>
+                {% else %}
+                <p>Ниту преподавателей.</p>
+                {% endif %}
+
+                <h4>Предметы</h4>
+                {% if subjects %}
+                {% for subject in subjects %}
+                <label for="subject_{{ subject.id }}">{{ subject.name }}</label>
+                <input type="checkbox" name="subject_id" id="subject_{{ subject.id }}" value="{{ subject.id }}">
+                {% endfor %}
+                {% else %}
+                <p>Ниту предметов.</p>
+                {% endif %}
+
+                {% if teachers and subjects %}
+                <input type="submit" name="add_teacher" value="Добавить">
+                {% endif %}
+            </form>
+
+            {% if user_subjects %}
+            <h3>Список преподавателей</h3>
+            <div>
+                {% for user_subject in user_subjects %}
+                <p>{{ users[user_subject.user_id-1].name }} | Добавил: {{ users[user_subject.user_id-1].creator }} - {{ users[user_subject.user_id-1].creation_date }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% else %}
+            <p>Сначала добавьте пользователя (статус 2) и предметы.</p>
+            {% endif %}
+        </div>
+
+        <hr>
+
+        <div style="background-color: rgb(236, 194, 246);">
+            <h3>Добавление предмета </h3>
+            <form action="" method="post">
+                <p>Название</p>
+                <input type="text" name="name" spellcheck="false" autocomplete="off" maxlength="32" required>
+                
+                <input type="submit" name="add_subject" value="Добавить">
+            </form>
+
+            {% if subjects %}
+            <h3>Список предметов</h3>
+            <div>
+                {% for subject in subjects %}
+                <p>{{ subject.name }} | Добавил: {{ subject.creator }} - {{ subject.creation_date }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        <hr>
+                 
         <div style="background-color: rgb(180, 233, 235);">
             <h3>Логи</h3>
             {% if logs %}

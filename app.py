@@ -43,10 +43,10 @@ class Student(db.Model):
         return f'<student {self.id}>'
 
 
-class Subject(db.Model):
+class Subject(db.Model):                    
     __tablename__ = 'subjects'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(32), nullable=False)  # Название предмета.
+    name = db.Column(db.String(32), nullable=False)
     creator = db.Column(db.String(16), nullable=False)
     creation_date = db.Column(db.DateTime, default=datetime.now())
 
@@ -54,12 +54,22 @@ class Subject(db.Model):
         return f'<subject {self.id}>'
 
 
+class UserSubject(db.Model):
+    __tablename__ = 'user_subject'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, nullable=False)
+    subject_id = db.Column(db.Integer, nullable=False)
+
+    def __repr__(self):
+        return f'<user_subject {self.id}>'
+
+
 class Grade(db.Model):
     __tablename__ = 'grades'
     id = db.Column(db.Integer, primary_key=True)
     subject_id = db.Column(db.String(32), nullable=False)  # Название предмета.
     student_id = db.Column(db.Integer, nullable=False)  # Студент.
-    teacher_id = db.Column(db.String(16), nullable=False)  # Преподаватель.
+    user_id = db.Column(db.String(16), nullable=False)  # Преподаватель.
     creation_date = db.Column(db.DateTime, default=datetime.now())
 
     def __repr__(self):
