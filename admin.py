@@ -1,6 +1,6 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, render_template, url_for, request, flash, session, redirect
-from app import app, db, User, logger, Logs, StudentUser, Student
+from app import app, db, User, logger, Logs, Student
 
 
 @app.route('/admin/', methods=['POST', 'GET'])
@@ -45,13 +45,6 @@ def admin():
                     creator=session['user_name']
                 )
                 db.session.add(student)
-                db.session.flush()
-
-                student_user = StudentUser(
-                    student_id=student.id,
-                    user_id=student.group_id
-                )
-                db.session.add(student_user)
                 db.session.commit()
 
                 logger(1, session['user_name'], f'Студент добавлен: {student.name} | {student.login} | {student.group_id}')

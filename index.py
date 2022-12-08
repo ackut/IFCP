@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, request, flash, session, redirect
-from app import app, Student, Subject, TeacherSubject
+from app import app, Student, Subject
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -17,7 +17,6 @@ def index():
         'title': 'Таблица',
         'Student': Student,
         'Subject': Subject,
-        'TeacherSubject': TeacherSubject,
         'table_selected': table_selected
     }
 
