@@ -1,4 +1,7 @@
 {% extends 'general.html' %}
+{% set subjects = context.Subject.query.all() %}
+{% set user_subjects = context.UserSubject.query.all() %}
+{% set groups = context.User.query.filter_by(status=1).all() %}
 
 {% block content %}
 {{ super() }}
@@ -6,7 +9,20 @@
 <div class="container">
     <div class="content">
         <h2>Таблица типа</h2>
-        {% if session['status'] == 2 %}
+        {% if session['user_status'] >= 2 %}
+        <select id="subject">
+            {% for user_subject in user_subjects %}
+            {% if user_subject.user_id == session['user_id'] %}
+            <option value="{{ subjects[user_subject.subject_id-1].id }}">{{ subjects[user_subject.subject_id-1].name }}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+        
+        <select id="group">
+            {% for group in groups %}
+            <option value="{{ group.id }}">{{ group.name }}</option>
+            {% endfor %}
+        </select>
         {% endif %}
     </div>
 </div>
