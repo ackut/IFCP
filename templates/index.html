@@ -7,24 +7,28 @@
 {{ super() }}
 
 <div class="container">
-    <div class="content">
-        <h2>Таблица типа</h2>
-        {% if session['user_status'] >= 2 %}
-        <select id="subject">
-            {% for user_subject in user_subjects %}
-            {% if user_subject.user_id == session['user_id'] %}
-            <option value="{{ subjects[user_subject.subject_id-1].id }}">{{ subjects[user_subject.subject_id-1].name }}</option>
-            {% endif %}
-            {% endfor %}
-        </select>
-        
-        <select id="group">
-            {% for group in groups %}
-            <option value="{{ group.id }}">{{ group.name }}</option>
-            {% endfor %}
-        </select>
-        {% endif %}
-    </div>
+  <div class="content">
+    <h2>Таблица типа</h2>
+    {% if session['user_status'] >= 2 %}
+    <select id="subject">
+      {% for user_subject in user_subjects %} {% if user_subject.user_id ==
+      session['user_id'] %}
+      <option value="{{ subjects[user_subject.subject_id-1].id }}">
+        {{ subjects[user_subject.subject_id-1].name }}
+      </option>
+      {% endif %} {% endfor %}
+    </select>
+
+    <select id="group">
+      {% for group in groups %}
+      <option value="{{ group.id }}">{{ group.name }}</option>
+      {% endfor %}
+    </select>
+
+    <table id="table-box"></table>
+
+    {% endif %}
+  </div>
 </div>
 
 <script src="../static/js/index.js"></script>
