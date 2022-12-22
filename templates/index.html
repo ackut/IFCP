@@ -7,10 +7,12 @@
 {{ super() }}
 
 <div class="container">
-  <div class="content">
-    <h2>Таблица типа</h2>
+  <div class="content" style="width: 95%; text-align: center;">
+    <img src="static/img/put.jpg" alt="" style="width: 100%; height: 130%; position: absolute; top: 0; left: 0; z-index: -1;">
+    <h2>Электронный журнал России</h2>
+  
     {% if session['user_status'] >= 2 %}
-    <select id="subject">
+    <!-- <select id="subject">
       {% for user_subject in user_subjects %} {% if user_subject.user_id ==
       session['user_id'] %}
       <option value="{{ subjects[user_subject.subject_id-1].id }}">
@@ -23,9 +25,13 @@
       {% for group in groups %}
       <option value="{{ group.id }}">{{ group.name }}</option>
       {% endfor %}
-    </select>
+    </select> -->
 
-    <table id="table-box"></table>
+    <table id="table">
+      <tr id="date"><td>№</td><td class="grey">Студент</td></tr>
+    </table>
+
+    <h1 style="color: #fff; background-color: #000; padding: 10px 0;">"Тяжело в учении - легко в бою!" (с) Александр Суворов</h1>
 
     {% endif %}
   </div>

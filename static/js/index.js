@@ -1,97 +1,54 @@
+const STUDENTS = [
+    'Zельский VладислаV',
+    'VорошилоV Даниил',
+    'Финченко Кирилл',
+    'ЦатуроV Артур',
+    'ХодыреV Николай',
+    'КублашVили Гиоргий',
+    'VасенёV Кирилл',
+    'Vылегжанин Илья',
+    'Куценко Андрей',
+    'АлексееV Илья',
+    'МахмудоV Ренад',
+    'Голосной Максим',
+    'КасьяноV Михаил',
+    'КонеVцоV ИVан',
+    'ФедотоV Андрей',
+    'ОрлоV ПаVел',
+    'Райхерт Дмитрий',
+    'УмароV АZал',
+    'АспандиеV Ибрагим',
+    'ДраноV Артём',
+    'КриVулин Фёдор',
+]
+
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
+
+
 $(() => {
-    var selected_subject = $('#subject');
-    var selected_group = $('#group');
+    var table = $('#table');
+    var date = $('#date');
 
-    selected_subject.change(() => {
-        console.log($("#subject option:selected").val());
-    });
+    ib = 0;
+    while (30 > ib) {
+        ib += 1
+        date.append(`<td class="grey">${ib}</td>`);
+    }
 
-    selected_group.change(() => {
-        composeTable($("#group option:selected").val());
+    i = 0;
+    STUDENTS.forEach(student => {
+        i += 1
+        table.append(`<tr id="${i}"><td>${i}</td></tr>`);
+        var tr = $(`#${i}`);
+        tr.append(`<td class="grey std" id="student_${i}">${student}</td>`);
+
+        ia = 0
+        while (30 > ia) {
+            ia += 1
+            tr.append(`<td id="${i}"></td>`);
+        }
     });
 });
-
-
-const STUDENTS1 = [
-    'Ворошилов Даниил',
-    'Зельский Владислав',
-    'Васенёв Кирилл',
-    'Коневцов Иван',
-    'Куценко Андрей',
-    'Кривулин Фёдор',
-    'Вылегжанин Илья',
-    'Федотов Андрей',
-    'Райхерт Дмитрий',
-    'Алексеев Илья',
-    'Касьянов Михаил',
-    'Финченко Кирилл',
-    'Калайтанов Алексей'
-]
-
-
-const STUDENTS2 = [
-    'Студент Студентов',
-    'Студент Студентов',
-    'Студент Студентов',
-    'Студент Студентов',
-    'Студент Студентов',
-    'Студент Студентов',
-    'Студент Студентов',
-    'Студент Студентов',
-    'Студент Студентов',
-    'Студент Студентов',
-    'Студент Студентов',
-]
-
-
-function composeTable(asd) {
-    var table_box = $('#table-box');
-    var table = $('#table');
-    
-    if (asd == 1) {
-        table.remove();
-        table_box.append('<table id="table"></table>');
-        var table = $('#table');
-        STUDENTS1.forEach(student => {
-            table.append(`<tr><td>${student}</td></tr>`);
-        });
-    }
-
-    if (asd == 2) {
-        table.remove();
-        table_box.append('<table id="table"></table>');
-        var table = $('#table');
-        STUDENTS2.forEach(student => {
-            table.append(`<tr><td>${student}</td></tr>`);
-        });
-    }
-
-    var tr = Array.from($('tr'));
-
-    tr.forEach(tra => {
-        i = 0
-        while (i < 30) {
-            i += 1
-            tra.append('   |   3');
-        }
-    });
-}
-
-
-function sendAjax(data) {
-    $.ajax({
-        type: "get",
-        url: "",
-        data: data,
-        dataType: "json",
-        contentType: 'application/json',
-        success: function (response) {
-            ajaxHandler(response);
-        }
-    });
-}
-
-
-function ajaxHandler(response) {
-    console.log(response);
-}
